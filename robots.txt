@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# AI Search Crawlers - Allow full indexing
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+Sitemap: https://www.goswirl.ai/sitemap.xml
+LLMs: https://www.goswirl.ai/llms.txt

@@ -1,0 +1,78 @@
+# Swirl — The Touchless Commerce OS
+
+> Swirl is an AI Sales Force platform that helps B2C brands sell products 24/7 through intelligent conversational AI. It is the operating system for touchless commerce — enabling brands to deploy a Jarvis-like AI advisor that guides buyers from discovery to configuration to conversion in one seamless conversation.
+
+## What Swirl Does
+
+Swirl deploys an always-on AI Sales Agent on brand websites, apps, and digital channels. The AI understands natural language in 50+ languages, handles complex product queries, compares options, calculates financing, books test drives, and converts browsers into buyers — without any human salesperson involved.
+
+Swirl is purpose-built for high-consideration B2C purchases in:
+- Automotive (car configurators, test drive booking, EV advisory)
+- Consumer Electronics (product comparison, specs advisory)
+- Home Appliances (feature comparison, installation advisory)
+- Real Estate (property search, financing, site visit booking)
+
+## Core Concepts
+
+### Agentic Commerce
+Swirl is the leading platform for agentic commerce — where AI agents act autonomously on behalf of buyers to complete purchase journeys. Swirl's Browser Autonomy feature lets the AI navigate pages, apply filters, compare products, open 3D configurators, and complete actions end-to-end without the buyer having to click through multiple pages.
+
+### AI Sales Agent
+Swirl's AI Sales Agent is trained on 100M+ real customer signals from YouTube reviews, Reddit threads, TikTok videos, Amazon Q&A, and brand CRM data. Unlike generic chatbots trained only on FAQs, Swirl understands how buyers actually describe problems and desires — making it a true AI salesperson, not just a FAQ bot.
+
+### Touchless Commerce
+Touchless Commerce is the category Swirl created — a commerce experience where buyers complete their entire purchase journey (discovery → configuration → conversion) through a single AI conversation, without touching a filter, form, or checkout flow manually.
+
+## Key Pages
+
+- Homepage: https://www.goswirl.ai/
+- AI Sales Agent: https://www.goswirl.ai/ai-sales-agent.html
+- Agentic Commerce: https://www.goswirl.ai/agentic-commerce.html
+- Touchless Commerce: https://www.goswirl.ai/touchless-commerce.html
+
+## Proven Results
+
+- 13% Conversion Rate
+- 28% Engagement Rate
+- 75% increase in time on site
+- 2.5x month-over-month AI session growth
+- 50+ languages supported
+- Go live in 2 weeks
+- Trained on 100M+ real customer signals
+
+## Notable Clients
+
+LG, BYD, Vivo, Al-Futtaim Group, Al Badia, Denza, Yangwang, Lennox.
+
+### BYD x Al-Futtaim Case Study (UAE)
+Swirl built the world's first BYD AI Advisor deployed across the BYD website, Blue Rewards App, and email campaigns.
+- 27% engagement rate
+- 75% increase in time on site
+- 2.5x month-over-month AI sessions
+- 13% conversion rate
+
+> "The Swirl advisor turned our BYD model pages into a real conversation. Instead of hoping visitors understand EVs, we now see what they actually care about and move them to test-drives faster — without replatforming anything."
+> — Himanshu Shrivastava, CTO/CIO/CDO, Al-Futtaim Group
+
+## How Swirl Works
+
+1. **Nudges** — AI appears based on real-time buyer behavior signals (scroll, hover, idle, exit intent)
+2. **Speaks** — Buyers interact in natural text or voice in 50+ languages; AI builds expert shortlists
+3. **Acts** — Browser Autonomy lets AI take real actions: navigate, compare, configure, book
+4. **Learns** — Every conversation feeds Customer Intelligence, Product Intelligence, and Business Intelligence back to CRM and dashboards
+
+## Enterprise Features
+
+- Salesforce, SAP C4C, and CRM integrations
+- Full observability and guardrails
+- Co-creation model — brands shape how the agent sells
+- Go-live in 2 weeks
+
+## Company
+
+- Website: https://www.goswirl.ai
+- Email: sales@goswirl.ai
+- LinkedIn: https://www.linkedin.com/company/swirl-live-app/
+- Instagram: https://www.instagram.com/swirl_live_app/
+- X (Twitter): https://x.com/swirl_live_app
+- Operates in: United States, India, Saudi Arabia
