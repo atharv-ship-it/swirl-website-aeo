@@ -26,9 +26,9 @@ Touchless Commerce is the category Swirl created — a commerce experience where
 ## Key Pages
 
 - Homepage: https://www.goswirl.ai/
-- AI Sales Agent: https://www.goswirl.ai/ai-sales-agent.html
-- Agentic Commerce: https://www.goswirl.ai/agentic-commerce.html
-- Touchless Commerce: https://www.goswirl.ai/touchless-commerce.html
+- AI Sales Agent: https://www.goswirl.ai/ai-sales-agent
+- Agentic Commerce: https://www.goswirl.ai/agentic-commerce
+- Touchless Commerce: https://www.goswirl.ai/touchless-commerce
 
 ## Proven Results
 
