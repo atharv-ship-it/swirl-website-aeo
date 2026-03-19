@@ -29,6 +29,8 @@ Touchless Commerce is the category Swirl created — a commerce experience where
 - AI Sales Agent: https://www.goswirl.ai/ai-sales-agent
 - Agentic Commerce: https://www.goswirl.ai/agentic-commerce
 - Touchless Commerce: https://www.goswirl.ai/touchless-commerce
+- BYD Al-Futtaim Case Study: https://www.goswirl.ai/byd-al-futtaim
+- Voice Agent Architecture: https://www.goswirl.ai/voice-agent-architecture
 
 ## Proven Results
 

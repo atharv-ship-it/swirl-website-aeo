@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>How Swirl's AI Voice Agent Works  Architecture Overview</title>
+  <meta name="description" content="An overview of the architecture behind Swirl's AI voice agent  covering the real-time pipeline, knowledge retrieval system, tool layer, and the engineering decisions that enable sub-500ms voice conversations at scale.">
+  <meta name="keywords" content="AI voice agent, voice agent architecture, real-time AI, agentic commerce, sub-500ms latency, speech AI, knowledge retrieval">
+  <meta name="author" content="Swirl">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0B1D2C">
+  <link rel="canonical" href="https://www.goswirl.ai/voice-agent-architecture">
+  <link rel="sitemap" type="application/xml" href="https://www.goswirl.ai/sitemap.xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.goswirl.ai/voice-agent-architecture">
+  <meta property="og:title" content="How Swirl's AI Voice Agent Works  Architecture Overview">
+  <meta property="og:description" content="An overview of the architecture behind Swirl's AI voice agent  covering the real-time pipeline, knowledge retrieval system, tool layer, and the engineering decisions that enable sub-500ms voice conversations at scale.">
+  <meta property="og:image" content="https://www.goswirl.ai/assets/swirl-ai-social-preview.jpg">
+  <meta property="og:site_name" content="Swirl">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Swirl's AI Voice Agent Works  Architecture Overview">
+  <meta name="twitter:description" content="An overview of the architecture behind Swirl's AI voice agent  covering the real-time pipeline, knowledge retrieval system, tool layer, and the engineering decisions that enable sub-500ms voice conversations at scale.">
+  <meta name="twitter:image" content="https://www.goswirl.ai/assets/swirl-ai-social-preview.jpg">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/favicon-32.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <!-- AI Crawler / AEO Meta Tags -->
+  <meta name="application-name" content="Swirl AI Sales Force">
+  <meta name="creator" content="Swirl">
+  <meta name="category" content="AI Voice Agent, Agentic Commerce, Technical Overview">
+  <meta name="classification" content="Technical Overview, AI Commerce, Business Software">
+  <meta name="coverage" content="Worldwide">
+
+  <!-- Structured Data  Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.goswirl.ai/#organization",
+    "name": "Swirl",
+    "url": "https://www.goswirl.ai",
+    "logo": "https://www.goswirl.ai/assets/logo.svg",
+    "description": "The Touchless Commerce OS  AI Sales Force that sells 24/7 across all digital channels.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "sales@goswirl.ai",
+      "contactType": "sales"
+    },
+    "sameAs": [
+      "https://www.instagram.com/swirl_live_app/",
+      "https://www.linkedin.com/company/swirl-live-app/",
+      "https://x.com/swirl_live_app",
+      "https://www.facebook.com/swirlliveapp/"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data  Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": "https://www.goswirl.ai/voice-agent-architecture#article",
+    "headline": "How Swirl's AI Voice Agent Works  Architecture Overview",
+    "description": "An overview of the architecture behind Swirl's AI voice agent  covering the real-time pipeline, knowledge retrieval system, tool layer, and the engineering decisions that enable sub-500ms voice conversations at scale.",
+    "url": "https://www.goswirl.ai/voice-agent-architecture",
+    "datePublished": "2026-03-01",
+    "dateModified": "2026-03-15",
+    "author": {
+      "@type": "Organization",
+      "@id": "https://www.goswirl.ai/#organization"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://www.goswirl.ai/#organization"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.goswirl.ai/voice-agent-architecture"
+    },
+    "keywords": "AI voice agent, voice agent architecture, real-time AI, agentic commerce, sub-500ms latency",
+    "about": [
+      { "@type": "Thing", "name": "AI Voice Agent" },
+      { "@type": "Thing", "name": "Agentic Commerce" },
+      { "@type": "Thing", "name": "Real-Time AI" }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data  TechArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "@id": "https://www.goswirl.ai/voice-agent-architecture#techarticle",
+    "headline": "How Swirl's AI Voice Agent Works  Architecture Overview",
+    "description": "An architectural overview of Swirl's real-time voice pipeline  covering how speech, reasoning, and action are unified into a single conversation stream.",
+    "url": "https://www.goswirl.ai/voice-agent-architecture",
+    "proficiencyLevel": "Intermediate",
+    "author": {
+      "@type": "Organization",
+      "@id": "https://www.goswirl.ai/#organization"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://www.goswirl.ai/#organization"
+    },
+    "datePublished": "2026-03-01",
+    "dateModified": "2026-03-15"
+  }
+  </script>
+
+  <!-- Structured Data  FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does Swirl's voice agent achieve sub-500ms response latency?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Swirl uses a unified real-time stream rather than a chained STT → LLM → TTS pipeline. In a chained pipeline, each component adds sequential latency  approximately 200ms for speech-to-text, 400ms for the LLM, and 300ms for text-to-speech, totalling roughly 900ms. The unified stream processes speech understanding, reasoning, and voice synthesis in a single continuous connection, reducing end-to-end latency to under 500ms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Swirl's architecture and a traditional voice pipeline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A traditional voice pipeline chains three separate models sequentially: speech-to-text, an LLM, and text-to-speech. Each adds latency and each handoff introduces failure modes. Swirl's unified real-time stream combines all three into a single continuous connection  reducing latency by approximately 400ms and eliminating the quality degradation that occurs at sequential handoff points."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Swirl retrieve product knowledge during a live conversation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Through a three-tier system: Tier 1 is in-memory product configurations retrieved in under 5ms. Tier 2 is vector search across a structured knowledge base for longer-tail queries. Tier 3 is live web retrieval for competitor data and real-time market information. All results are cached within the session  repeat queries resolve in sub-millisecond time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What actions can Swirl's AI voice agent take autonomously?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The agent can retrieve live product data, render visual UI components (EMI calculator, configurator, maps), capture buyer information through conversation, complete test drive bookings (phone, location, time slot, confirmation), write leads to CRM, and track intent signals  all within a single continuous conversation on the brand's product page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Swirl scale across multiple brands and product lines?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The platform is multi-tenant and configuration-driven. Each client has isolated knowledge bases, tool configurations, and agent personalities defined in config files. New products and verticals deploy without changes to the core platform code  new configurations go live in hours. The underlying infrastructure scales horizontally, handling thousands of concurrent sessions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What data does Swirl capture from voice conversations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every session generates structured events: each tool call, question type, buyer response, and session branch is logged. This produces queryable data on which questions buyers ask, where they hesitate, which interventions (calculators, maps, comparisons) move them forward, and how sessions progress toward conversion. This data feeds CRM systems, content strategy, and platform improvement without requiring separate analytics tooling."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data  BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.goswirl.ai/" },
+      { "@type": "ListItem", "position": 2, "name": "Voice Agent Architecture", "item": "https://www.goswirl.ai/voice-agent-architecture" }
+    ]
+  }
+  </script>
+
+  <style>
+    .ai-summary { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* Article page specific styles */
+    .article-hero {
+      background: var(--bg-dark);
+      padding: 120px 0 80px;
+      color: var(--text-on-dark);
+    }
+    .article-hero .breadcrumb {
+      font-size: 13px;
+      color: var(--text-on-dark-muted);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-hero .breadcrumb a {
+      color: var(--text-on-dark-muted);
+      transition: color 0.2s;
+    }
+    .article-hero .breadcrumb a:hover { color: #fff; }
+    .article-hero .breadcrumb span { color: var(--text-on-dark-muted); }
+    .article-tag {
+      display: inline-block;
+      background: rgba(103, 232, 249, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(103, 232, 249, 0.3);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .article-hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      max-width: 760px;
+    }
+    .article-hero .hero-sub {
+      font-size: 18px;
+      color: var(--text-on-dark-muted);
+      max-width: 640px;
+      line-height: 1.7;
+      margin: 0 0 32px 0;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-on-dark-muted);
+    }
+    .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Article body */
+    .article-body {
+      padding: 72px 0;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 64px;
+      align-items: start;
+    }
+    .article-content h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 56px 0 16px;
+      color: var(--text-primary);
+    }
+    .article-content h2:first-child { margin-top: 0; }
+    .article-content h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+    }
+    .article-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .article-content ul, .article-content ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .article-content li {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .article-content strong { color: var(--text-primary); font-weight: 600; }
+    .article-content a:not(.btn-primary):not(.btn-secondary):not(.related-card) { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .article-content a:not(.btn-primary):not(.btn-secondary):not(.related-card):hover { opacity: 0.8; }
+    .article-content .btn-primary, .article-content .btn-secondary { text-decoration: none; }
+
+    /* Definition callout */
+    .definition-box {
+      background: var(--bg-soft);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px 28px;
+      margin: 24px 0 32px;
+    }
+    .definition-box p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text-primary);
+      font-weight: 450;
+      margin: 0;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0 32px;
+      font-size: 15px;
+    }
+    .compare-table th {
+      background: var(--bg-dark);
+      color: #fff;
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    .compare-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+    .compare-table th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+    .compare-table td {
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: var(--bg-soft); }
+
+    /* How steps */
+    .how-steps { margin: 28px 0; }
+    .how-step {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 28px;
+      align-items: flex-start;
+    }
+    .how-step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .how-step-body h3 { margin: 0 0 8px; font-size: 17px; }
+    .how-step-body p { margin: 0; }
+
+    /* Tech stack */
+    .tech-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .tech-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .tech-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tech-card p { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* Stat row */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 24px 0 32px;
+    }
+    .stat-item {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* FAQ */
+    .faq-list { margin: 24px 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border-light);
+      padding: 20px 0;
+    }
+    .faq-item:first-child { padding-top: 0; }
+    .faq-q {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* CTA inline */
+    .article-cta-box {
+      background: var(--bg-dark);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      margin: 56px 0 0;
+      color: var(--text-on-dark);
+    }
+    .article-cta-box h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .article-cta-box p {
+      font-size: 16px;
+      color: var(--text-on-dark-muted);
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+    .article-cta-box .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Sidebar */
+    .article-sidebar { position: sticky; top: 84px; }
+    .toc-box {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .toc-box h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .toc-box ol { padding-left: 16px; margin: 0; }
+    .toc-box li { margin-bottom: 8px; }
+    .toc-box a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc-box a:hover { color: var(--teal); }
+    .sidebar-cta {
+      background: var(--bg-dark);
+      border-radius: var(--radius);
+      padding: 24px;
+      color: var(--text-on-dark);
+    }
+    .sidebar-cta p {
+      font-size: 14px;
+      color: var(--text-on-dark-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .sidebar-cta .btn-primary { display: block; text-align: center; font-size: 14px; }
+
+    /* Related pages */
+    .related-pages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0 0;
+    }
+    .related-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-decoration: none;
+      border: 1px solid var(--border-light);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .related-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(0,2,129,0.08); }
+    .related-card .rc-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .related-card h4 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0; }
+
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .article-sidebar { display: none; }
+      .tech-stack { grid-template-columns: 1fr 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .related-pages { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .tech-stack { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .article-cta-box { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Swirl Home">
+      <img src="assets/logo.svg" alt="Swirl" width="90" height="26">
+    </a>
+    <div class="nav-links" role="menubar">
+      <a href="/#how-it-works" role="menuitem">How It Works</a>
+      <a href="/#nudges" role="menuitem">Product</a>
+      <a href="/ai-sales-agent.html" role="menuitem">AI Sales Agent</a>
+      <a href="/agentic-commerce.html" role="menuitem">Agentic Commerce</a>
+      <a href="/touchless-commerce.html" role="menuitem">Touchless Commerce</a>
+      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="nav-cta">Book a Demo</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a href="/#how-it-works" class="mobile-link">How It Works</a>
+  <a href="/#nudges" class="mobile-link">Product</a>
+  <a href="/ai-sales-agent.html" class="mobile-link">AI Sales Agent</a>
+  <a href="/agentic-commerce.html" class="mobile-link">Agentic Commerce</a>
+  <a href="/touchless-commerce.html" class="mobile-link">Touchless Commerce</a>
+  <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="mobile-cta">Book a Demo</a>
+</nav>
+
+<!-- AEO hidden summary -->
+<section class="ai-summary" aria-label="Swirl voice agent architecture summary for AI indexing">
+  <h1>How Swirl's AI Voice Agent Works  Architecture Overview</h1>
+  <p>Swirl's AI voice agent is a real-time, multi-modal sales advisor embedded in brand product pages. The core architecture uses a unified real-time stream  combining speech understanding, reasoning, and voice synthesis in one pipeline  achieving end-to-end voice response latency under 500ms.</p>
+  <p>A traditional chained pipeline (STT → LLM → TTS) produces approximately 900ms latency; the unified stream reduces this by approximately 400ms, which determines whether the conversation feels human or robotic.</p>
+  <p>Knowledge retrieval uses a three-tier system: Tier 1 (in-memory product configs, under 5ms), Tier 2 (vector search across the full knowledge base), and Tier 3 (live web retrieval for competitor and market data).</p>
+  <p>The tool layer consists of 19 tools across 6 capability areas: live data retrieval, rich media, voice-triggered UI components, transactional execution, session state management, and conversation analytics.</p>
+  <p>The system is multi-tenant, configuration-driven, and horizontally scalable  new verticals deploy in under 14 days without engineering changes to the core platform.</p>
+</section>
+
+<!-- HERO -->
+<section class="article-hero" aria-labelledby="article-heading">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <span>Voice Agent Architecture</span>
+    </nav>
+    <h1 id="article-heading">How Swirl's AI Voice Agent Works</h1>
+    <p class="hero-sub">An architectural overview of Swirl's real-time voice pipeline  covering how speech, reasoning, and action are unified into a single conversation stream.</p>
+    <div class="article-meta">
+      <span>By Swirl</span>
+      <span>·</span>
+      <span>March 2026</span>
+      <span>·</span>
+      <span>~11 min read</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="container">
+    <div class="article-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="article-content" itemscope itemtype="https://schema.org/TechArticle">
+
+        <!-- WHAT IT IS -->
+        <h2 id="what-it-is">What Swirl's Voice Agent Is</h2>
+        <div class="definition-box">
+          <p>Swirl's AI voice agent is a real-time sales advisor embedded directly inside brand product pages. It accepts buyer questions in natural language  via voice or text  retrieves live product knowledge, reasons about the buyer's needs, renders relevant visual components mid-conversation, and completes purchase actions such as test drive bookings. It operates autonomously within the buyer's current page, with no redirect and no form submission required.</p>
+        </div>
+        <p>The agent is designed for high-consideration commerce  contexts where buyers have specific, complex questions that static pages cannot resolve. Its primary function is not to inform (as a chatbot does) but to guide decisions and trigger purchase actions.</p>
+
+        <!-- PIPELINE -->
+        <h2 id="pipeline">The Pipeline Architecture</h2>
+        <p>Most voice AI systems chain three separate components: speech-to-text (STT), a large language model (LLM), and text-to-speech (TTS). Each step adds latency. A chained pipeline typically produces approximately 900ms end-to-end latency  enough to make a voice conversation feel delayed and mechanical.</p>
+
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Traditional Pipeline</th>
+              <th>Swirl Unified Stream</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>STT &rarr; LLM &rarr; TTS (sequential)</td>
+              <td>Speech + Reasoning + Voice (single stream)</td>
+            </tr>
+            <tr>
+              <td>~900ms end-to-end latency</td>
+              <td>&lt;500ms end-to-end latency</td>
+            </tr>
+            <tr>
+              <td>3 separate processing stages</td>
+              <td>Unified real-time connection</td>
+            </tr>
+            <tr>
+              <td>Robotic, delayed feel</td>
+              <td>Conversational, natural feel</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Swirl's architecture uses a unified real-time stream, where speech understanding, reasoning, and voice output happen in a continuous connection rather than sequential stages. The ~400ms latency difference is the threshold between a voice interaction that feels human and one that does not  directly affecting whether buyers continue the conversation or abandon it.</p>
+
+        <!-- KNOWLEDGE -->
+        <h2 id="knowledge">Knowledge Retrieval System</h2>
+        <p>The agent retrieves product knowledge through a three-tier system designed to balance retrieval speed with coverage:</p>
+
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="how-step-num">1</div>
+            <div class="how-step-body">
+              <h3>Tier 1  Instant Memory (&lt;5ms)</h3>
+              <p>Product specifications, pricing, variant configurations, and model rules held in-memory. Retrieved instantly without any external query. Used for the most frequent query types  pricing, specs, availability.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">2</div>
+            <div class="how-step-body">
+              <h3>Tier 2  Intelligent Retrieval</h3>
+              <p>Vector search across the full structured knowledge base  matching buyer queries to the complete product corpus using embedding-based retrieval. Handles longer-tail questions and cross-product comparisons.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">3</div>
+            <div class="how-step-body">
+              <h3>Tier 3  Live Intelligence</h3>
+              <p>Real-time web retrieval for competitor data, live market pricing, and external signals. Fires on-demand for comparison queries and current market questions. Results cached within session for sub-millisecond repeat access.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOL LAYER -->
+        <h2 id="tool-layer">The Tool Layer</h2>
+        <p>The agent executes 19 discrete tools across 6 capability areas during live conversations. Tools fire mid-conversation in response to buyer intent  not through explicit commands from the buyer.</p>
+
+        <div class="tech-stack">
+          <div class="tech-card">
+            <h4>Knowledge  Live Data Retrieval</h4>
+            <p>In-memory product configs, vector search, real-time web retrieval, live market data.</p>
+          </div>
+          <div class="tech-card">
+            <h4>Media  Rich Product Media</h4>
+            <p>Product images, embedded video, customer reviews surfaced on demand.</p>
+          </div>
+          <div class="tech-card">
+            <h4>UI Components  Voice-Triggered Visuals</h4>
+            <p>EMI calculator, model configurator, showroom map, charging network map, comparison cards, booking slots.</p>
+          </div>
+          <div class="tech-card">
+            <h4>Actions  Transactional Execution</h4>
+            <p>Test drive booking (phone, location, time slot, confirmation), lead capture, CRM write-back.</p>
+          </div>
+          <div class="tech-card">
+            <h4>Session  State Management</h4>
+            <p>Conversation history, context window management, multi-turn context, session caching.</p>
+          </div>
+          <div class="tech-card">
+            <h4>Analytics  Conversation Intelligence</h4>
+            <p>Structured event logging, buyer hesitation tracking, cost and performance monitoring.</p>
+          </div>
+        </div>
+
+        <p>When a buyer asks a pricing question, the tool layer fires the EMI calculator and renders it visually  the buyer sees the output while the agent speaks it. When a buyer asks about a charging station, a live map renders. The visual and voice outputs are synchronised, not sequential.</p>
+
+        <!-- PRINCIPLES -->
+        <h2 id="principles">Engineering Principles</h2>
+        <p>Five design decisions shaped how the platform was built:</p>
+        <ol>
+          <li><strong>Answer first</strong>  The agent answers the buyer's stated question before any upsell or data capture. Trust is built answer by answer.</li>
+          <li><strong>Render, don't recite</strong>  Voice triggers visual. Pricing questions surface an EMI calculator. Charging questions render a live map. Voice and visual output are synchronised.</li>
+          <li><strong>Make hesitation machine-readable</strong>  Every tool call, question type, and session branch is a structured event. Buyer hesitation becomes queryable data.</li>
+          <li><strong>Zero-friction conversion</strong>  Bookings complete entirely within the voice conversation. No form, no redirect, no new tab.</li>
+          <li><strong>Configuration over code</strong>  Agent personality, tool permissions, knowledge scope, and escalation rules live in config files. New products deploy without a release cycle.</li>
+        </ol>
+
+        <!-- SCALE -->
+        <h2 id="scale">Scale Characteristics</h2>
+        <p>The platform is designed for multi-tenant horizontal scaling without architectural changes. Key characteristics:</p>
+
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">2L+</div>
+            <div class="stat-label">conversations handled in production</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">&lt;500ms</div>
+            <div class="stat-label">voice latency at full load</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">99.9%</div>
+            <div class="stat-label">uptime SLA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">&lt;14d</div>
+            <div class="stat-label">new vertical deployment</div>
+          </div>
+        </div>
+
+        <p>The session layer uses Redis for conversation state and tool cache, enabling sub-millisecond repeat retrieval within a session. The API layer is stateless, scaling linearly with traffic. Tenant isolation is handled at the knowledge base and configuration level  no shared state between client deployments.</p>
+
+        <!-- CTA BOX -->
+        <div class="article-cta-box">
+          <h2>See the Voice Agent in Action</h2>
+          <p>Book a live demo and see how Swirl deploys on your product pages in under 2 weeks.</p>
+          <div class="cta-buttons">
+            <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="btn-primary">Book a Demo &rarr;</a>
+            <a href="mailto:sales@goswirl.ai" class="btn-secondary" style="color:#fff;border-color:rgba(255,255,255,0.2);">Talk to Sales</a>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <h2 id="faq">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <p class="faq-q">How does Swirl's voice agent achieve sub-500ms response latency?</p>
+            <p class="faq-a">Swirl uses a unified real-time stream rather than a chained STT &rarr; LLM &rarr; TTS pipeline. In a chained pipeline, each component adds sequential latency  approximately 200ms for speech-to-text, 400ms for the LLM, and 300ms for text-to-speech, totalling roughly 900ms. The unified stream processes speech understanding, reasoning, and voice synthesis in a single continuous connection, reducing end-to-end latency to under 500ms.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">What is the difference between Swirl's architecture and a traditional voice pipeline?</p>
+            <p class="faq-a">A traditional voice pipeline chains three separate models sequentially: speech-to-text, an LLM, and text-to-speech. Each adds latency and each handoff introduces failure modes. Swirl's unified real-time stream combines all three into a single continuous connection  reducing latency by approximately 400ms and eliminating the quality degradation that occurs at sequential handoff points.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">How does Swirl retrieve product knowledge during a live conversation?</p>
+            <p class="faq-a">Through a three-tier system: Tier 1 is in-memory product configurations retrieved in under 5ms. Tier 2 is vector search across a structured knowledge base for longer-tail queries. Tier 3 is live web retrieval for competitor data and real-time market information. All results are cached within the session  repeat queries resolve in sub-millisecond time.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">What actions can Swirl's AI voice agent take autonomously?</p>
+            <p class="faq-a">The agent can retrieve live product data, render visual UI components (EMI calculator, configurator, maps), capture buyer information through conversation, complete test drive bookings (phone, location, time slot, confirmation), write leads to CRM, and track intent signals  all within a single continuous conversation on the brand's product page.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">How does Swirl scale across multiple brands and product lines?</p>
+            <p class="faq-a">The platform is multi-tenant and configuration-driven. Each client has isolated knowledge bases, tool configurations, and agent personalities defined in config files. New products and verticals deploy without changes to the core platform code  new configurations go live in hours. The underlying infrastructure scales horizontally, handling thousands of concurrent sessions.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">What data does Swirl capture from voice conversations?</p>
+            <p class="faq-a">Every session generates structured events: each tool call, question type, buyer response, and session branch is logged. This produces queryable data on which questions buyers ask, where they hesitate, which interventions (calculators, maps, comparisons) move them forward, and how sessions progress toward conversion. This data feeds CRM systems, content strategy, and platform improvement without requiring separate analytics tooling.</p>
+          </div>
+        </div>
+
+        <!-- RELATED PAGES -->
+        <h2>Related Topics</h2>
+        <div class="related-pages">
+          <a href="/byd-al-futtaim.html" class="related-card">
+            <p class="rc-tag">Case Study</p>
+            <h4>BYD Al-Futtaim Case Study</h4>
+          </a>
+          <a href="/ai-sales-agent.html" class="related-card">
+            <p class="rc-tag">Guide</p>
+            <h4>What is an AI Sales Agent?</h4>
+          </a>
+          <a href="/agentic-commerce.html" class="related-card">
+            <p class="rc-tag">Guide</p>
+            <h4>What is Agentic Commerce?</h4>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar" aria-label="Table of contents">
+        <div class="toc-box">
+          <h4>On This Page</h4>
+          <ol>
+            <li><a href="#what-it-is">What It Is</a></li>
+            <li><a href="#pipeline">Pipeline Architecture</a></li>
+            <li><a href="#knowledge">Knowledge Retrieval</a></li>
+            <li><a href="#tool-layer">Tool Layer</a></li>
+            <li><a href="#principles">Engineering Principles</a></li>
+            <li><a href="#scale">Scale</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ol>
+        </div>
+        <div class="sidebar-cta">
+          <p>See Swirl's AI voice agent live on your brand's product pages.</p>
+          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="btn-primary">Book a Demo &rarr;</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <a href="/" aria-label="Swirl Home">
+            <img src="assets/logo.svg" alt="Swirl" width="90" height="26">
+          </a>
+        </div>
+        <p class="footer-tagline">The Touchless Commerce OS. AI-powered sales agents for high-consideration commerce  Automotive, Electronics, Appliances, Real Estate.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="/agentic-commerce.html">Agentic Commerce</a>
+        <a href="/ai-sales-agent.html">AI Sales Agent</a>
+        <a href="/touchless-commerce.html">Touchless Commerce</a>
+        <a href="/byd-al-futtaim.html">BYD Case Study</a>
+        <a href="/swirl-voice-architecture.html">Voice Agent Architecture</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="#">Automotive</a>
+        <a href="#">Consumer Electronics</a>
+        <a href="#">Appliances</a>
+        <a href="#">Real Estate</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Resources</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/swirl_live_app/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/company/swirl-live-app/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/swirl_live_app" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/swirlliveapp/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Swirl. All rights reserved.</div>
+      <div class="footer-offices">USA &bull; India &bull; Saudi Arabia</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 10) {
+      nav.style.borderBottomColor = 'var(--border-light)';
+      nav.style.background = 'rgba(244,243,236,0.95)';
+    } else {
+      nav.style.borderBottomColor = 'transparent';
+      nav.style.background = 'rgba(244,243,236,0.88)';
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>

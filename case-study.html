@@ -1,0 +1,2888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Voice Agent Platform  Product Case Study | GoSwirl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --white: #FFFFFF;
+      --cream: #f4f3ec;
+      --brand: #000281;
+      --brand-light: rgba(0, 2, 129, 0.08);
+      --brand-mid: rgba(0, 2, 129, 0.15);
+      --dark: #0B1D2C;
+      --dark-mid: #122A3D;
+      --text: #111111;
+      --text-secondary: #555555;
+      --text-muted: #888888;
+      --border: #EBEBEB;
+      --border-mid: #D4D4D4;
+      --cyan: #67E8F9;
+      --cyan-soft: rgba(103, 232, 249, 0.12);
+      --r: 12px;
+      --r-sm: 8px;
+      --r-lg: 16px;
+      --r-xl: 24px;
+      --container: 1140px;
+      --transition: 0.25s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(244, 243, 236, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: var(--brand-light);
+      border: 1px solid var(--brand-mid);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── CONTAINER ───────────────────────────────────────── */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────── */
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-cream {
+      background: var(--cream);
+    }
+
+    .section-dark {
+      background: var(--dark);
+    }
+
+    .section-sm {
+      padding: 64px 0;
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding: 148px 0 80px;
+      background: var(--white);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: var(--cream);
+      border: 1px solid var(--border-mid);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--brand);
+      border-radius: 50%;
+    }
+
+    .highlight-heading {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .compare-box {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .compare-box.highlight {
+      border: 1px solid #5b8cff;
+      background: rgba(91, 140, 255, 0.08);
+    }
+
+    .muted {
+      opacity: 0.7;
+    }
+
+    .impact-text {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -2.5px;
+      color: var(--text);
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--brand);
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .hero-quote {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      border-radius: var(--r);
+    }
+
+    .hero-quote::before {
+      content: '"';
+      font-size: 28px;
+      font-style: normal;
+      color: var(--brand);
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .hero-meta {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* ── SECTION LABEL ───────────────────────────────────── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .section-label-light {
+      color: rgba(103, 232, 249, 0.8);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-title-light {
+      color: var(--white);
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    .section-sub-light {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    /* ── TLDR ────────────────────────────────────────────── */
+    .tldr-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--brand);
+      border-radius: var(--r-lg);
+      padding: 32px 36px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .tldr-box strong {
+      color: var(--text);
+    }
+
+    /* ── OVERVIEW ────────────────────────────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .overview-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 28px 32px;
+    }
+
+    .overview-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--brand-light);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .overview-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+
+    .overview-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── PROBLEM CARDS ───────────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .problem-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .problem-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .problem-card-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .problem-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .problem-card p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── SOLUTION PILLARS ────────────────────────────────── */
+    .solution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* LIST */
+    .insight-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .insight-list li {
+      margin-bottom: 18px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* SUMMARY LINE */
+    .insight-summary {
+      margin-top: 20px;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    /* CALLOUT */
+    .whatis-callout {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    .callout-highlight {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .callout-list {
+      margin-top: 10px;
+      padding-left: 18px;
+    }
+
+    .callout-list li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .solution-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      transition: border-color var(--transition);
+    }
+
+    .solution-item:hover {
+      border-color: var(--brand);
+    }
+
+    .solution-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--brand);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .usecase-box {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.02);
+      font-size: 14px;
+    }
+
+    .solution-item-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .solution-item-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── HOW IT WORKS (DARK) ─────────────────────────────── */
+    .pipeline-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-xl);
+      padding: 32px;
+      margin: 40px 0;
+      overflow-x: auto;
+    }
+
+    .pipeline-code {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      white-space: pre;
+    }
+
+    .pipeline-code .cyan {
+      color: var(--cyan);
+    }
+
+    .pipeline-code .brand {
+      color: #818cf8;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      /* give more space to diagram */
+      gap: 48px;
+      align-items: center;
+    }
+
+    .how-text p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .how-text strong {
+      color: var(--white);
+    }
+
+    .how-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .how-feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .how-feature-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── FEATURES GRID ───────────────────────────────────── */
+    .built-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      background: var(--white);
+    }
+
+    .built-stat {
+      padding: 20px 28px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .built-stat:last-child {
+      border-right: none;
+    }
+
+    .built-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -1px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .built-stat-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.35;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border);
+      border-left-color: var(--brand);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+    }
+
+    .feature-card-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--brand-light);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .feature-card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--brand);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-card ul li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .feature-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.5;
+    }
+
+    /* ── USE CASES ───────────────────────────────────────── */
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .usecase-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .usecase-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .usecase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand) 0%, #0891B2 100%);
+    }
+
+    .usecase-industry {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 10px;
+    }
+
+    .usecase-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    .usecase-scenario {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .usecase-outcome {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .usecase-outcome-icon {
+      width: 20px;
+      height: 20px;
+      background: #DCFCE7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+
+    /* ── METRICS ─────────────────────────────────────────── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .metric-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .quote-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: '"';
+      font-size: 40px;
+      font-style: normal;
+      color: var(--brand);
+      opacity: 0.2;
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .quote-card p {
+      padding-top: 12px;
+    }
+
+    /* ── CHALLENGES (ACCORDION) ──────────────────────────── */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .architecture-img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .accordion-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+
+    .accordion-item.open {
+      border-color: var(--brand);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .accordion-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .accordion-num {
+      width: 28px;
+      height: 28px;
+      background: var(--brand-light);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .accordion-trigger h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
+    .accordion-icon {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .accordion-item.open .accordion-icon {
+      transform: rotate(45deg);
+      background: var(--brand);
+      color: var(--white);
+      border-color: var(--brand);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .accordion-body-inner {
+      padding: 0 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-body-inner p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: 16px;
+    }
+
+    .accordion-body-inner strong {
+      color: var(--text);
+    }
+
+    .accordion-solution {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: var(--cream);
+      border-radius: var(--r);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      border-left: 3px solid var(--brand);
+    }
+
+    .accordion-solution strong {
+      color: var(--text);
+    }
+
+    /* ── LEARNINGS ───────────────────────────────────────── */
+    .learnings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .learning-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .learning-num {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--brand);
+      opacity: 0.15;
+      line-height: 1;
+      flex-shrink: 0;
+      letter-spacing: -2px;
+      margin-top: -4px;
+    }
+
+    .learning-content strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+    }
+
+    .learning-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── FUTURE SCOPE (DARK) ─────────────────────────────── */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .future-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-xl);
+      padding: 28px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .future-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(103, 232, 249, 0.3);
+    }
+
+    .future-card-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .future-card:hover .future-card-icon {
+      background: rgba(91, 140, 255, 0.15);
+      border-color: rgba(91, 140, 255, 0.35);
+    }
+
+    .future-card-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(255, 255, 255, 0.65);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.2s;
+    }
+
+    .future-card:hover .future-card-icon svg {
+      stroke: #7aaaff;
+    }
+
+    .future-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .future-card p {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+    }
+
+    /* ── SCALABILITY SECTION ─────────────────────────────── */
+    .scale-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+
+    .scale-stat {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 32px 28px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .scale-stat:hover {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .scale-stat-value {
+      font-size: clamp(30px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .scale-stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .scale-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .scale-pillar {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .scale-pillar:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(103, 232, 249, 0.25);
+    }
+
+    .scale-pillar-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .scale-pillar-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(255, 255, 255, 0.65);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .scale-pillar h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .scale-pillar ul {
+      list-style: none;
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .scale-pillar ul li {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.5);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .scale-pillar ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--cyan);
+      opacity: 0.7;
+    }
+
+    /* ── CONCLUSION ──────────────────────────────────────── */
+    .conclusion-card {
+      background: var(--dark);
+      border-radius: var(--r-xl);
+      padding: 64px;
+      text-align: center;
+    }
+
+    .conclusion-card h2 {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .conclusion-card p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 560px;
+      margin: 0 auto 16px;
+      line-height: 1.65;
+    }
+
+    .conclusion-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      background: var(--white);
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity var(--transition);
+    }
+
+    .conclusion-cta:hover {
+      opacity: 0.9;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── DIVIDER ─────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ── WHAT IS SECTION ─────────────────────────────────── */
+    .whatis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .whatis-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .whatis-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .whatis-check {
+      width: 22px;
+      height: 22px;
+      background: #DCFCE7;
+      border: 1px solid #BBF7D0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: #16A34A;
+      margin-top: 1px;
+    }
+
+    .diagram-wrapper {
+      background: #fff;
+      padding: 8px;
+      /* reduce from 16px */
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .whatis-callout {
+      background: linear-gradient(135deg, var(--brand) 0%, #0891B2 100%);
+      border-radius: var(--r-xl);
+      padding: 40px;
+      color: var(--white);
+    }
+
+    .whatis-callout h3 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .whatis-callout p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ── FADE IN ─────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── OUTCOME SECTION ─────────────────────────────────── */
+    .outcome-snapshot {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      background: var(--white);
+    }
+
+    .outcome-snapshot-item {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .outcome-snapshot-item:last-child {
+      border-right: none;
+    }
+
+    .outcome-snapshot-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 6px;
+    }
+
+    .outcome-snapshot-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .outcome-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .outcome-metrics {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .outcome-metrics.engagement {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .outcome-metrics.impact {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+
+    .outcome-metric {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .outcome-metric.hero {
+      background: linear-gradient(135deg, var(--brand) 0%, #0052cc 100%);
+      border-color: transparent;
+    }
+
+    .outcome-metric-value {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .outcome-metric.hero .outcome-metric-value {
+      color: #fff;
+      font-size: clamp(32px, 4vw, 48px);
+    }
+
+    .outcome-metric-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .outcome-metric.hero .outcome-metric-label {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .outcome-metric-bench {
+      font-size: 11px;
+      color: var(--brand);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .outcome-metric.hero .outcome-metric-bench {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .insight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .insight-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .insight-card:hover {
+      border-color: var(--brand);
+      box-shadow: 0 8px 28px rgba(0, 120, 212, 0.08);
+    }
+
+    .insight-card-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .insight-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+    }
+
+    .insight-card-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .byd-quote {
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--brand) 0%, #0052cc 100%);
+      border-radius: 16px;
+      padding: 40px 48px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-end;
+    }
+
+    .byd-quote-text {
+      flex: 1;
+    }
+
+    .byd-quote-mark {
+      font-size: 72px;
+      line-height: 0.6;
+      color: rgba(255, 255, 255, 0.25);
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .byd-quote-body {
+      font-size: 17px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .byd-quote-body strong {
+      font-style: normal;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .byd-quote-attr {
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .byd-quote-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .byd-quote-role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 700px) {
+      .byd-quote {
+        flex-direction: column;
+        gap: 24px;
+        padding: 28px 24px;
+      }
+
+      .byd-quote-attr {
+        text-align: left;
+      }
+    }
+
+    /* ── ENGINEERING PRINCIPLES SECTION ─────────────────── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .principle-card {
+      position: relative;
+      padding: 32px 28px 28px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .principle-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 8px);
+    }
+
+    .principle-card:hover {
+      border-color: var(--brand);
+      box-shadow: 0 8px 32px rgba(0, 120, 212, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .principle-num {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 48px;
+      font-weight: 800;
+      color: rgba(0, 0, 0, 0.05);
+      line-height: 1;
+      letter-spacing: -2px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .principle-card:hover .principle-num {
+      color: rgba(0, 120, 212, 0.07);
+    }
+
+    .principle-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 14px;
+    }
+
+    .principle-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .principle-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .principle-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── ARCHITECTURE SECTION (image-first) ──────────────── */
+    .arch-image-hero {
+      width: 100%;
+      margin: 0 auto 48px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: #fff;
+      padding: 12px;
+    }
+
+    .arch-image-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    .arch-stats {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .arch-stat-box {
+      border-radius: 14px;
+      padding: 24px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .arch-stat-box.muted-box {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .arch-stat-box.highlight-box {
+      background: rgba(91, 140, 255, 0.1);
+      border-color: #5b8cff;
+    }
+
+    .arch-stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 8px;
+    }
+
+    .arch-stat-formula {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+
+    .arch-stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .arch-stat-value.muted-val {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .arch-stat-value.bright-val {
+      color: #5b8cff;
+    }
+
+    .arch-vs {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.25);
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0 8px;
+    }
+
+    .arch-impact {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      margin-bottom: 48px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .arch-tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .arch-tier {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .arch-tier:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(91, 140, 255, 0.4);
+    }
+
+    .arch-tier-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5b8cff;
+      background: rgba(91, 140, 255, 0.12);
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+
+    .arch-tier h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .arch-tier p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.55;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+
+      .scale-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .scale-pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .built-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .built-stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .built-stat:last-child {
+        border-bottom: none;
+      }
+
+      .outcome-snapshot,
+      .outcome-metrics.engagement,
+      .outcome-metrics.impact,
+      .insight-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .outcome-snapshot-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .outcome-snapshot-item:last-child {
+        border-bottom: none;
+      }
+
+      .arch-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .arch-vs {
+        display: none;
+      }
+
+      .arch-tiers {
+        grid-template-columns: 1fr;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principle-card:last-child:nth-child(odd) {
+        max-width: 100%;
+      }
+
+      .overview-grid,
+      .problem-grid,
+      .features-grid,
+      .usecase-grid,
+      .learnings-grid,
+      .future-grid,
+      .how-grid,
+      .whatis-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .quotes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .conclusion-card {
+        padding: 40px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        padding: 100px 0 56px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-meta {
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">GoSwirl <span>/ Case Study</span></a>
+      <span class="nav-badge">Product Case Study</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="fade-in">
+
+        <span class="hero-badge">AI Voice Agent Platform</span>
+
+        <h1>
+          Real-Time AI Voice Agents<br>
+          for <em>High-Consideration</em> Commerce
+        </h1>
+
+        <p class="hero-tagline">
+          Deploy human-like voice agents directly inside your product experience 
+          answer questions, guide decisions, and complete actions in real time.
+          No replatforming. Go live in days.
+        </p>
+
+        <div class="hero-meta">
+          <div class="hero-stat">
+            <span class="hero-stat-value">2L+</span>
+            <span class="hero-stat-label">Conversations handled</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">&lt;600ms</span>
+            <span class="hero-stat-label">Voice response latency</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">55–70%</span>
+            <span class="hero-stat-label">Queries automated</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">80–90%</span>
+            <span class="hero-stat-label">Cost reduction</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">Days</span>
+            <span class="hero-stat-label">Deployment time</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section-cream">
+    <div class="container" style="padding: 50px;">
+
+      <div class="section-header">
+        <div class="section-label fade-in">01  Problem</div>
+        <h2 class="section-title fade-in">
+          High-Consideration Products<br>Don’t Convert on Static Pages
+        </h2>
+        <p class="section-sub fade-in">
+          Buyers don’t come to browse  they come with specific, high-intent questions.
+          Static pages can inform, but they cannot resolve uncertainty in the moment it matters.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+
+        <!-- QUESTIONS -->
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Real Question</div>
+          <h4>“How far can I drive in 45°C heat?”</h4>
+          <p>
+            Contextual, real-world queries that require live answers  not static specifications.
+            These are asked at the exact moment a buyer decides or drops off.
+          </p>
+        </div>
+
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Real Question</div>
+          <h4>“What’s my EMI with 60,000 AED down?”</h4>
+          <p>
+            Financial decisions require dynamic calculations. Static pages break flow by pushing
+            users to external tools  losing intent in the process.
+          </p>
+        </div>
+
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Real Question</div>
+          <h4>“How does this compare to competitors?”</h4>
+          <p>
+            Buyers evaluate, not just explore. Without real-time comparisons, they leave to research
+            elsewhere  and rarely return.
+          </p>
+        </div>
+
+        <!-- PAINS -->
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Pain 01</div>
+          <h4>No Real-Time Interaction</h4>
+          <p>
+            No mechanism to engage users during peak intent. Sessions end without resolution.
+            Average time on page stays low, conversions suffer.
+          </p>
+        </div>
+
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Pain 02</div>
+          <h4>Broken Conversion Flow</h4>
+          <p>
+            Discovery and action are disconnected. Booking happens elsewhere, introducing friction
+            and increasing drop-off at every step.
+          </p>
+        </div>
+
+        <div class="problem-card fade-in">
+          <div class="problem-card-num">Pain 03</div>
+          <h4>Zero Visibility into Intent</h4>
+          <p>
+            Businesses don’t know what users asked, where they hesitated, or why they left.
+            High-intent signals exist  but go completely uncaptured.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 THE CATCH -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label section-label-light fade-in">02  The Insight</div>
+        <h2 class="section-title section-title-light fade-in">
+          Buyers Don’t Drop Off.<br>They Drop When Unanswered.
+        </h2>
+        <p class="section-sub section-sub-light fade-in">
+          Session data revealed a clear pattern  drop-off is not caused by low intent,
+          but by unanswered questions at critical decision moments.
+        </p>
+      </div>
+
+      <div class="how-grid">
+
+        <!-- LEFT: POINTS -->
+        <div class="how-text fade-in">
+
+          <ul class="insight-list">
+            <li>
+              <strong>High-intent buyers ask complex questions</strong><br>
+              Range, pricing, comparisons  not basic product info.
+            </li>
+
+            <li>
+              <strong>No answer = no conversion</strong><br>
+              If a question isn’t resolved instantly, users leave to research elsewhere.
+            </li>
+
+            <li>
+              <strong>The gap is not persuasion  it’s resolution</strong><br>
+              Conversion depends on answering, not convincing.
+            </li>
+
+            <li>
+              <strong>Unanswered questions = lost data</strong><br>
+              Without conversation capture, businesses lose insight into buyer intent.
+            </li>
+          </ul>
+
+          <p class="insight-summary">
+            The problem isn’t traffic or product quality.
+            <strong>It’s the inability to respond in real time.</strong>
+          </p>
+
+        </div>
+
+        <!-- RIGHT: CALLOUT -->
+        <div class="fade-in">
+          <div class="whatis-callout">
+
+            <h3>Not a chatbot problem</h3>
+
+            <p>
+              The market didn’t need another widget.
+            </p>
+
+            <p class="callout-highlight">
+              It needed a system that can:
+            </p>
+
+            <ul class="callout-list">
+              <li>Answer in natural language</li>
+              <li>Act in real time (booking, pricing, comparison)</li>
+              <li>Capture and structure buyer intent</li>
+              <li>Operate inside the buying journey  not outside it</li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 WHAT SWIRL DID TO SOLVE IT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-in">03  What Swirl Did to Solve It</div>
+        <h2 class="section-title fade-in">The Touchless Commerce Flow</h2>
+        <p class="section-sub fade-in">A voice-first sales advisor embedded directly in product pages. Visitors speak
+          naturally. The advisor responds in spoken language, surfaces live data, renders UI components
+          mid-conversation, and moves buyers through a complete purchase journey without leaving the page.</p>
+      </div>
+      <div class="solution-list">
+        <div class="solution-item fade-in">
+          <div class="solution-dot"></div>
+          <div class="solution-item-content">
+            <strong>Ask  Buyer states needs in natural language</strong>
+            <p>No forms. No menus. No scripted flows. The buyer speaks; the advisor listens, understands intent, and
+              responds  handling interruptions, follow-ups, and context switches gracefully.</p>
+          </div>
+        </div>
+        <div class="solution-item fade-in">
+          <div class="solution-dot"></div>
+          <div class="solution-item-content">
+            <strong>See  Advisor instantly surfaces relevant specs, range, imagery, pricing</strong>
+            <p>Voice triggers visual. The right product information, images, and data appear on screen in direct
+              response to the spoken question  not as a static page, as a live answer.</p>
+          </div>
+        </div>
+        <div class="solution-item fade-in">
+          <div class="solution-dot"></div>
+          <div class="solution-item-content">
+            <strong>Compare  Side-by-side model guidance and competitor comparison, rendered as cards</strong>
+            <p>The advisor guides, recommends, and explains differences. Competitor questions answered with live
+              retrieval. The buyer sees the comparison; the advisor narrates it.</p>
+          </div>
+        </div>
+        <div class="solution-item fade-in">
+          <div class="solution-dot"></div>
+          <div class="solution-item-content">
+            <strong>Confirm  Intent and preferences captured in-conversation</strong>
+            <p>Name, phone, model preference, location  gathered naturally through conversation, not a form. The
+              advisor predicts the next buying move and nudges at the right moment.</p>
+          </div>
+        </div>
+        <div class="solution-item fade-in">
+          <div class="solution-dot"></div>
+          <div class="solution-item-content">
+            <strong>Book  Test-drive or finance scheduling completed in-flow, without redirect</strong>
+            <p>Phone spoken and parsed. Location selected from a map card. Time slot picked from a grid. Confirmation
+              spoken by the agent. No form. No redirect. No new tab. Done.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tldr-box fade-in" style="margin-top:32px;">
+        <strong>Deployment:</strong> Single script tag embed. No replatforming. No CMS changes. Live in under 14 days.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 WHAT WE BUILT -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-in">04  What We Built</div>
+        <h2 class="section-title fade-in">A Multi-Modal AI Voice<br>Sales Advisor</h2>
+        <p class="section-sub fade-in">The advisor doesn't just answer  it acts. 19 tools fire mid-conversation to
+          execute live logic and render UI components across six capability layers.</p>
+      </div>
+
+      <!-- STAT STRIP -->
+      <div class="built-stats fade-in">
+        <div class="built-stat">
+          <div class="built-stat-num">19</div>
+          <div class="built-stat-label">Tools firing mid-conversation</div>
+        </div>
+        <div class="built-stat">
+          <div class="built-stat-num">6</div>
+          <div class="built-stat-label">Capability layers</div>
+        </div>
+        <div class="built-stat">
+          <div class="built-stat-num">&lt;5ms</div>
+          <div class="built-stat-label">Knowledge retrieval (Tier 1)</div>
+        </div>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="5" rx="9" ry="3" />
+              <path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+              <path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9" />
+              <path d="M3 13v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">Knowledge</span>
+          <h3>Live Data Retrieval</h3>
+          <ul>
+            <li>In-memory model config  specs, pricing, variants, warranty (&lt;5ms)</li>
+            <li>Vector search matched to a full knowledge index</li>
+            <li>Real-time web retrieval for competitor intelligence</li>
+            <li>Live market listings for pricing context</li>
+          </ul>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+              <polygon points="10 9 15 12 10 15 10 9" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">Media</span>
+          <h3>Rich Product Media</h3>
+          <ul>
+            <li>Product images served from cloud storage</li>
+            <li>YouTube video integration mid-conversation</li>
+            <li>Customer reviews surfaced on demand</li>
+            <li>Media orchestrator for coordinated rendering</li>
+          </ul>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="8" rx="1.5" />
+              <rect x="13" y="3" width="8" height="8" rx="1.5" />
+              <rect x="3" y="13" width="8" height="8" rx="1.5" />
+              <rect x="13" y="13" width="8" height="8" rx="1.5" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">UI Cards</span>
+          <h3>Voice-Triggered Visual Components</h3>
+          <ul>
+            <li>Interactive pricing table and EMI calculator</li>
+            <li>Car configurator and 3D experience zone</li>
+            <li>Showroom map and charging network map</li>
+            <li>Promotional cards and live booking slots</li>
+          </ul>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">Actions</span>
+          <h3>Transactional Execution</h3>
+          <ul>
+            <li>Test-drive booking  phone, location, time slot, confirmation</li>
+            <li>Phone number validation in-conversation</li>
+            <li>Lead capture and CRM write-back</li>
+            <li>Intent detection to trigger next-step nudges</li>
+          </ul>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">Session</span>
+          <h3>State & Context Management</h3>
+          <ul>
+            <li>Redis  session state, tool cache, conversation history</li>
+            <li>Context window management with intelligent pruning</li>
+            <li>Multi-turn context across complex interactions</li>
+            <li>Sub-ms retrieval on repeat queries within session</li>
+          </ul>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <span class="feature-card-tag">Analytics</span>
+          <h3>Conversation Intelligence</h3>
+          <ul>
+            <li>Every tool call and session branch  a structured event</li>
+            <li>Buyer hesitation becomes queryable data</li>
+            <li>Token usage and cost tracking per session</li>
+            <li>Session-to-conversion funnel visibility</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ARCHITECTURE -->
+  <section class="section section-dark">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label section-label-light fade-in">05  Architecture</div>
+        <h2 class="section-title section-title-light fade-in">Real-Time Voice Architecture</h2>
+        <p class="section-sub section-sub-light fade-in">
+          A low-latency, unified voice pipeline where speech understanding, reasoning, and response generation
+          happen in a single stream  enabling human-like conversations and real-time action execution.
+        </p>
+      </div>
+
+      <!-- HERO IMAGE -->
+      <div class="arch-image-hero fade-in">
+        <img src="assets/arc.png" alt="AI Voice Architecture Diagram" />
+      </div>
+
+      <!-- LATENCY COMPARISON -->
+      <div class="arch-stats fade-in">
+        <div class="arch-stat-box muted-box">
+          <div class="arch-stat-label">Traditional Pipeline</div>
+          <div class="arch-stat-formula">STT → LLM → TTS</div>
+          <div class="arch-stat-value muted-val">~900ms latency</div>
+        </div>
+        <div class="arch-vs">VS</div>
+        <div class="arch-stat-box highlight-box">
+          <div class="arch-stat-label">Swirl Unified Realtime Stream</div>
+          <div class="arch-stat-formula">Speech + Reasoning + Voice in one pipeline</div>
+          <div class="arch-stat-value bright-val">&lt;500ms end-to-end</div>
+        </div>
+      </div>
+
+      <p class="arch-impact fade-in">
+        At ~900ms, conversations feel delayed and robotic. Under 500ms, they feel natural 
+        directly impacting engagement, trust, and conversion.
+      </p>
+
+      <!-- THREE-TIER KNOWLEDGE -->
+      <div class="arch-tiers fade-in">
+        <div class="arch-tier">
+          <span class="arch-tier-badge">Tier 1 · &lt;5ms</span>
+          <h4>Instant Memory</h4>
+          <p>In-memory model configs  specs, pricing, variants, and rules served instantly without retrieval.</p>
+        </div>
+        <div class="arch-tier">
+          <span class="arch-tier-badge">Tier 2</span>
+          <h4>Intelligent Retrieval</h4>
+          <p>Vector search across a structured knowledge base, matching embeddings to the full product corpus.</p>
+        </div>
+        <div class="arch-tier">
+          <span class="arch-tier-badge">Tier 3 · Live</span>
+          <h4>Live Intelligence</h4>
+          <p>Real-time web retrieval for competitor data, live pricing, and market signals on demand.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- <section class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label section-label-light fade-in">05  Architecture</div>
+        <h2 class="section-title section-title-light fade-in">How It Works</h2>
+        <p class="section-sub section-sub-light fade-in">A real-time audio connection between client and AI engine 
+          speech understanding, reasoning, and voice synthesis in a single unified stream, with the backend executing
+          live tool calls on demand.</p>
+      </div>
+      <div class="how-grid">
+        <div class="fade-in">
+          <img src="arc.png" alt="Architecture diagram" style="width:100%;border-radius:12px;">
+        </div>
+        <div class="how-text fade-in">
+          <p><strong>Why a unified stream  not a chained pipeline:</strong></p>
+          <p>Traditional pipeline: STT (~200ms) → LLM (~400ms) → TTS (~300ms) = ~900ms total.<br>
+            Swirl architecture: unified real-time stream = <strong>&lt;500ms end-to-end.</strong></p>
+          <p>At 900ms, voice feels robotic. Under 500ms, it feels human. That distinction directly determines whether
+            users continue the conversation or abandon it.</p>
+          <p><strong>Three-Tier Knowledge Retrieval</strong></p>
+          <ul class="how-feature-list">
+            <li>Tier 1  In-memory model config: specs, pricing, variants, warranty (&lt;5ms)</li>
+            <li>Tier 2  Vector search index: embeddings matched to full knowledge base</li>
+            <li>Tier 3  Real-time web retrieval for competitor and live market data</li>
+            <li>All results cached  sub-ms on repeat queries within session</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- 07 OUR APPROACH -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-in">06  Our Approach</div>
+        <h2 class="section-title fade-in">Five Engineering Principles</h2>
+        <p class="section-sub fade-in">The decisions that shaped the platform  and why each one mattered commercially,
+          not just technically.</p>
+      </div>
+      <div class="principles-grid">
+
+        <div class="principle-card fade-in">
+          <div class="principle-num">01</div>
+          <div class="principle-tag">Trust</div>
+          <div class="principle-title">Answer first  action follows trust</div>
+          <p class="principle-desc">The agent answers the buyer's stated question before any upsell or data capture.
+            Trust is built answer by answer. The sale follows naturally  not through pressure, through clarity.</p>
+        </div>
+
+        <div class="principle-card fade-in">
+          <div class="principle-num">02</div>
+          <div class="principle-tag">Multimodal</div>
+          <div class="principle-title">Render, don't recite</div>
+          <p class="principle-desc">Voice triggers visual. Pricing questions surface an interactive EMI calculator.
+            Charging questions render a live map. Voice and UI are synchronised  multi-modal by design, not by
+            addition.</p>
+        </div>
+
+        <div class="principle-card fade-in">
+          <div class="principle-num">03</div>
+          <div class="principle-tag">Intelligence</div>
+          <div class="principle-title">Make hesitation machine-readable</div>
+          <p class="principle-desc">Every tool call, question type, and session branch is a structured event. Buyer
+            hesitation becomes queryable data  feeding back into prompt tuning, content gaps, and product decisions.
+          </p>
+        </div>
+
+        <div class="principle-card fade-in">
+          <div class="principle-num">04</div>
+          <div class="principle-tag">Conversion</div>
+          <div class="principle-title">Zero-friction conversion path</div>
+          <p class="principle-desc">Bookings complete entirely within the voice conversation  phone spoken and parsed,
+            location selected from a map card, time slot picked from a grid, confirmation spoken by the agent. No form.
+            No redirect.</p>
+        </div>
+
+        <div class="principle-card fade-in">
+          <div class="principle-num">05</div>
+          <div class="principle-tag">Platform</div>
+          <div class="principle-title">Configuration over code</div>
+          <p class="principle-desc">Agent personality, tool permissions, knowledge scope, and escalation rules all live
+            in config files. New products deploy without a release cycle. Behaviour changes go live in minutes. New
+            verticals in hours.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 OUTCOME -->
+  <section class="section section-cream">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="section-label fade-in">07  Outcome</div>
+        <h2 class="section-title fade-in">Automotive OEM  AI Voice Sales Advisor</h2>
+        <p class="section-sub fade-in">
+          Swirl deployed a real-time AI voice advisor across product detail pages for a leading
+          automotive OEM in the GCC  guiding buyers through vehicle exploration, live calculations,
+          and test-drive bookings, all within a single conversation.
+        </p>
+      </div>
+
+      <!-- DEPLOYMENT SNAPSHOT -->
+      <div class="outcome-snapshot fade-in">
+        <div class="outcome-snapshot-item">
+          <div class="outcome-snapshot-label">Use Case</div>
+          <div class="outcome-snapshot-value">EV product discovery + test-drive conversion</div>
+        </div>
+        <div class="outcome-snapshot-item">
+          <div class="outcome-snapshot-label">Deployment</div>
+          <div class="outcome-snapshot-value">Web PDPs + showroom touchpoints</div>
+        </div>
+        <div class="outcome-snapshot-item">
+          <div class="outcome-snapshot-label">Primary Actions</div>
+          <div class="outcome-snapshot-value">Model comparison · EMI calc · Charging queries · Booking</div>
+        </div>
+      </div>
+
+      <!-- ENGAGEMENT -->
+      <div class="outcome-group-label fade-in">Engagement</div>
+      <div class="outcome-metrics engagement fade-in">
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">217,387</div>
+          <div class="outcome-metric-label">AI-assisted conversations</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">27%</div>
+          <div class="outcome-metric-label">On-page engagement rate</div>
+          <div class="outcome-metric-bench">7× higher than static PDPs (~4%)</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">7 min</div>
+          <div class="outcome-metric-label">Average time on site</div>
+          <div class="outcome-metric-bench">Up from 4 min baseline (+75%)</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">2.5×</div>
+          <div class="outcome-metric-label">AI session growth</div>
+          <div class="outcome-metric-bench">Month-over-month, Sept → Nov 2025</div>
+        </div>
+      </div>
+
+      <!-- BUSINESS IMPACT -->
+      <div class="outcome-group-label fade-in">Business Impact</div>
+      <div class="outcome-metrics impact fade-in">
+        <div class="outcome-metric hero">
+          <div class="outcome-metric-value">$10M+</div>
+          <div class="outcome-metric-label">Attributed sales</div>
+          <div class="outcome-metric-bench">In under 4 months of deployment</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">5×</div>
+          <div class="outcome-metric-label">Test-drive conversion uplift</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">&lt;14d</div>
+          <div class="outcome-metric-label">Time to deploy</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-value">&lt;500ms</div>
+          <div class="outcome-metric-label">Voice response latency</div>
+        </div>
+      </div>
+
+      <!-- WHAT BYD LEARNED -->
+      <div class="outcome-group-label fade-in">What BYD Learned</div>
+      <p class="section-sub fade-in" style="text-align:left;margin-bottom:24px;margin-top:-8px;">
+        Beyond immediate sales, the AI revealed critical insights about buyer behavior that reshaped their digital
+        strategy.
+      </p>
+      <div class="insight-cards fade-in">
+        <div class="insight-card">
+          <div class="insight-card-num">01  Insight</div>
+          <div class="insight-card-title">Technical questions drive decisions</div>
+          <p class="insight-card-body">Most buyer questions were highly technical  focusing on charging infrastructure
+            and real-world range rather than just pricing. Content and sales positioning shifted accordingly.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-num">02  Insight</div>
+          <div class="insight-card-title">Measurable "Hesitation Moments"</div>
+          <p class="insight-card-body">The AI made hesitation measurable: identifying exactly what people ask, where
+            they pause, and which specific nudges  EMI, maps, comparisons  successfully move them forward.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-num">03  Insight</div>
+          <div class="insight-card-title">Data-driven content backlog</div>
+          <p class="insight-card-body">Conversation insights created a clear, prioritised backlog for content updates,
+            PDP improvements, and future campaign messaging  turning every session into a product signal.</p>
+        </div>
+      </div>
+
+      <!-- QUOTE -->
+      <div class="byd-quote fade-in">
+        <div class="byd-quote-text">
+          <span class="byd-quote-mark">"</span>
+          <p class="byd-quote-body">
+            The Swirl advisor turned our BYD model pages into a <strong>real conversation.</strong>
+            Instead of hoping visitors understand EVs, we now see what they actually care about
+            and move them to test-drives faster  without replatforming anything.
+          </p>
+        </div>
+        <div class="byd-quote-attr">
+          <div class="byd-quote-name">Himanshu</div>
+          <div class="byd-quote-role">BYD Al-Futtaim · Digital Leader</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 09 WHAT WE LEARNED -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-in">08  What We Learned</div>
+        <h2 class="section-title fade-in">Six Lessons from Production</h2>
+        <p class="section-sub fade-in">What building and shipping a production AI voice platform that drove measurable
+          commercial outcomes actually taught us.</p>
+      </div>
+      <div class="learnings-grid">
+        <div class="learning-card fade-in">
+          <div class="learning-num">01</div>
+          <div class="learning-content">
+            <strong>The answer gap is the conversion gap.</strong>
+            <p>Traffic and creative quality are rarely the bottleneck in high-consideration commerce. The unanswered
+              question at the moment of intent is. Solve that  conversion follows.</p>
+          </div>
+        </div>
+        <div class="learning-card fade-in">
+          <div class="learning-num">02</div>
+          <div class="learning-content">
+            <strong>Voice changes engagement depth, not just format.</strong>
+            <p>Buyers who engaged by voice asked more questions, spent more time on page, and converted at higher rates.
+              Voice removes the effort of typing  more questions asked means more intent surfaced.</p>
+          </div>
+        </div>
+        <div class="learning-card fade-in">
+          <div class="learning-num">03</div>
+          <div class="learning-content">
+            <strong>Showing is more persuasive than telling.</strong>
+            <p>EMI calculators, charging maps, and comparison cards outperformed pure voice responses. The ability to
+              render visual output in response to a spoken query was the most commercially impactful capability in the
+              tool layer.</p>
+          </div>
+        </div>
+        <div class="learning-card fade-in">
+          <div class="learning-num">04</div>
+          <div class="learning-content">
+            <strong>Conversation data is a durable product asset.</strong>
+            <p>The structured record of questions, hesitation points, and intent signals has independent strategic value
+               separate from the direct conversion effect. It informs content, product, and campaign decisions in ways
+              prior analytics tooling couldn't enable.</p>
+          </div>
+        </div>
+        <div class="learning-card fade-in">
+          <div class="learning-num">05</div>
+          <div class="learning-content">
+            <strong>Configuration-driven deployment is the only way to scale.</strong>
+            <p>New products went live in hours using the model registry pattern. Shared logic updates propagated
+              automatically. Rebuilding per product would have made the platform uneconomical at this scale.</p>
+          </div>
+        </div>
+        <div class="learning-card fade-in">
+          <div class="learning-num">06</div>
+          <div class="learning-content">
+            <strong>Latency is an experience metric, not a performance metric.</strong>
+            <p>The 400ms latency reduction from a unified stream over a chained pipeline was the single highest-leverage
+              technical decision. It determined whether the conversation felt human or robotic  and that distinction
+              determined whether users continued or abandoned.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 SCALABILITY -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label section-label-light fade-in">10  Scalability</div>
+        <h2 class="section-title section-title-light fade-in">Built to Scale Without Breaking</h2>
+        <p class="section-sub section-sub-light fade-in">
+          From a single deployment to enterprise-grade multi-tenant infrastructure  the same platform
+          that handled 2 lakh+ conversations continues to scale horizontally with zero architectural changes.
+        </p>
+      </div>
+
+      <!-- SCALE STATS -->
+      <div class="scale-stats fade-in">
+        <div class="scale-stat">
+          <div class="scale-stat-value">2L+</div>
+          <div class="scale-stat-label">Conversations handled in production</div>
+        </div>
+        <div class="scale-stat">
+          <div class="scale-stat-value">&lt;500ms</div>
+          <div class="scale-stat-label">Voice latency at full load</div>
+        </div>
+        <div class="scale-stat">
+          <div class="scale-stat-value">99.9%</div>
+          <div class="scale-stat-label">Uptime SLA</div>
+        </div>
+        <div class="scale-stat">
+          <div class="scale-stat-value">&lt;14d</div>
+          <div class="scale-stat-label">New vertical deployment</div>
+        </div>
+      </div>
+
+      <!-- THREE PILLARS -->
+      <div class="scale-pillars">
+
+        <div class="scale-pillar fade-in">
+          <div class="scale-pillar-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
+          </div>
+          <h4>Horizontal Infrastructure</h4>
+          <ul>
+            <li>Stateless API layer  scales linearly with traffic</li>
+            <li>Redis session store handles thousands of concurrent sessions</li>
+            <li>CDN-backed knowledge assets with sub-ms retrieval</li>
+            <li>Auto-scaling compute  no manual capacity planning</li>
+          </ul>
+        </div>
+
+        <div class="scale-pillar fade-in">
+          <div class="scale-pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4>Multi-Tenant Architecture</h4>
+          <ul>
+            <li>Isolated knowledge bases and tool configs per client</li>
+            <li>Single platform  unlimited product and brand deployments</li>
+            <li>Configuration-driven: new verticals in hours, not sprints</li>
+            <li>No shared state between tenant sessions</li>
+          </ul>
+        </div>
+
+        <div class="scale-pillar fade-in">
+          <div class="scale-pillar-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Observability at Scale</h4>
+          <ul>
+            <li>Every session, tool call, and token logged as structured events</li>
+            <li>Real-time cost and performance tracking per conversation</li>
+            <li>Latency degradation alerts before users notice</li>
+            <li>Session-to-conversion funnel visibility across all deployments</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 FUTURE SCOPE -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label section-label-light fade-in">09  Future Scope</div>
+        <h2 class="section-title section-title-light fade-in">What's Next</h2>
+        <p class="section-sub section-sub-light fade-in">The core is industry-agnostic. The same model registry, tool
+          execution engine, knowledge retrieval stack, and session state management adapts to any vertical via
+          configuration alone.</p>
+      </div>
+      <div class="future-grid">
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="12" width="4" height="9" rx="1" />
+              <rect x="10" y="7" width="4" height="14" rx="1" />
+              <rect x="17" y="3" width="4" height="18" rx="1" />
+            </svg>
+          </div>
+          <h3>Unified Analytics Dashboard</h3>
+          <p>Real-time conversation trends, hesitation hotspots, tool engagement, and session-to-conversion funnels 
+            for non-technical operators. No SQL. No BI tool. No data team required.</p>
+        </div>
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+              <circle cx="8" cy="6" r="2.5" fill="rgba(255,255,255,0.1)" />
+              <circle cx="16" cy="12" r="2.5" fill="rgba(255,255,255,0.1)" />
+              <circle cx="10" cy="18" r="2.5" fill="rgba(255,255,255,0.1)" />
+            </svg>
+          </div>
+          <h3>No-Code Agent Builder</h3>
+          <p>Select an industry template, define personality and scope, connect knowledge sources, enable tools, and
+            publish  all through a point-and-click interface. Under 1 hour from signup to live agent.</p>
+        </div>
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            </svg>
+          </div>
+          <h3>Cross-Industry Expansion</h3>
+          <p>Planned verticals: Real Estate (property Q&A, viewings), Healthcare (booking, triage), Financial Services
+            (loan pre-qual), E-Commerce (discovery, upsell), Hospitality (concierge, booking).</p>
+        </div>
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 3c-3.5 4.5-3.5 13.5 0 18" />
+              <path d="M12 3c3.5 4.5 3.5 13.5 0 18" />
+              <line x1="3" y1="9" x2="21" y2="9" />
+              <line x1="3" y1="15" x2="21" y2="15" />
+            </svg>
+          </div>
+          <h3>Multilingual Voice Support</h3>
+          <p>Native voice in Arabic, French, Spanish, Hindi, and Mandarin  with language-specific personality
+            calibration, not just translation. Regional phrasing, cultural norms, and local market context built in.</p>
+        </div>
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.86-1.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              <polyline points="17 1 21 5 17 9" />
+              <line x1="21" y1="5" x2="11" y2="5" />
+            </svg>
+          </div>
+          <h3>Proactive Outbound Sessions</h3>
+          <p>AI-initiated conversations triggered by CRM events  appointment reminders, incomplete booking follow-ups,
+            re-engagement of high-intent sessions, and renewal nudges.</p>
+        </div>
+
+        <div class="future-card fade-in">
+          <div class="future-card-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="5" cy="12" r="2" />
+              <circle cx="19" cy="5" r="2" />
+              <circle cx="19" cy="19" r="2" />
+              <path d="M7 11.5q6-1 10-4.5" />
+              <path d="M7 12.5q6 1 10 4.5" />
+            </svg>
+          </div>
+          <h3>Cross-Session Journey Intelligence</h3>
+          <p>Track buyer behaviour across multiple sessions and products. Understand which research paths lead to
+            conversion  and personalise each session from prior interaction history, not just current context.</p>
+        </div>
+
+      </div>
+
+      <!-- CONCLUSION -->
+      <div class="conclusion-card fade-in" style="margin-top:64px;">
+        <h2>The Voice of Your Business,<br>Available Everywhere. Always.</h2>
+        <p>The gap between what businesses need from customer communication and what they can afford with human teams is
+          widening. Customer expectations are higher, volumes are growing, and the economics of traditional contact
+          centres are under pressure.</p>
+        <p>AI Voice Agents are not a future technology. The question is no longer <em>whether</em> to deploy them  it
+          is <em>how quickly</em> you can reach production without rebuilding infrastructure from scratch.</p>
+        <a href="https://goswirl.ai" class="conclusion-cta">Learn more at GoSwirl.ai →</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- OVERVIEW -->
+
+  <script>
+    // Accordion
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item');
+      const body = item.querySelector('.accordion-body');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.accordion-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-body').style.maxHeight = null;
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
