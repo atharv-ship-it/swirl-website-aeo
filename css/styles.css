@@ -2192,3 +2192,128 @@ footer {
   margin-top: 2px;
 }
 .sc-confirm span { color: rgba(255,255,255,0.75); font-size: 11px; }
+
+/* ============================================================
+   KEY FACTS SECTION  (AEO structured entity block)
+   ============================================================ */
+.key-facts-section {
+  background: var(--bg-soft);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.key-facts-inner {
+  max-width: 860px;
+}
+
+.key-facts-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.key-facts-dl {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.kf-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.kf-row:last-child {
+  border-bottom: none;
+}
+
+.key-facts-dl dt {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+}
+
+.key-facts-dl dd {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+}
+
+.key-facts-dl dd a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .kf-row {
+    grid-template-columns: 1fr;
+  }
+  .key-facts-dl dt {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    padding: 10px 16px 8px;
+  }
+  .key-facts-dl dd {
+    padding: 8px 16px 14px;
+  }
+}
+
+/* ============================================================
+   FAQ SECTION  (visible DOM — read by AI engines and humans)
+   ============================================================ */
+.faq-section {
+  background: var(--bg-primary);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--border-light);
+  margin-top: 8px;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  padding: 28px 28px 24px;
+}
+
+.faq-q {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.faq-a p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}

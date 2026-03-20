@@ -1,6 +1,6 @@
 # Swirl — The Touchless Commerce OS
 
-> Swirl is an AI Sales Force platform that helps B2C brands sell products 24/7 through intelligent conversational AI. It is the operating system for touchless commerce — enabling brands to deploy a Jarvis-like AI advisor that guides buyers from discovery to configuration to conversion in one seamless conversation.
+> Swirl is an AI Sales Force platform that deploys autonomous AI agents on B2C brand websites to guide buyers from product discovery to purchase — without human intervention. It detects buyer intent in real time, answers questions via text and voice in 50+ languages, navigates and configures products on behalf of the buyer, and pushes qualified leads with full buying context to CRM. Brands go live in 2 weeks with no replatforming required.
 
 ## What Swirl Does
 
@@ -15,22 +15,42 @@ Swirl is purpose-built for high-consideration B2C purchases in:
 ## Core Concepts
 
 ### Agentic Commerce
-Swirl is the leading platform for agentic commerce — where AI agents act autonomously on behalf of buyers to complete purchase journeys. Swirl's Browser Autonomy feature lets the AI navigate pages, apply filters, compare products, open 3D configurators, and complete actions end-to-end without the buyer having to click through multiple pages.
+Agentic commerce is a commerce model where autonomous AI agents replace manual browsing, filtering, and form-filling. The agent detects buyer intent, retrieves product knowledge, compares options, configures selections, and completes transactions in a single conversation. Swirl is the infrastructure that makes agentic commerce possible on brand websites.
 
 ### AI Sales Agent
-Swirl's AI Sales Agent is trained on 100M+ real customer signals from YouTube reviews, Reddit threads, TikTok videos, Amazon Q&A, and brand CRM data. Unlike generic chatbots trained only on FAQs, Swirl understands how buyers actually describe problems and desires — making it a true AI salesperson, not just a FAQ bot.
+An AI sales agent is an autonomous software system that acts as a digital sales advisor — it understands intent, reasons about trade-offs, compares products dynamically, and executes actions. Unlike chatbots (which follow scripts), AI sales agents handle novel questions and complete transactions. Swirl's agents are trained on 100M+ real buyer signals from YouTube, Reddit, TikTok, Amazon Q&A, and brand CRM data.
 
 ### Touchless Commerce
-Touchless Commerce is the category Swirl created — a commerce experience where buyers complete their entire purchase journey (discovery → configuration → conversion) through a single AI conversation, without touching a filter, form, or checkout flow manually.
+Touchless Commerce is the purchase journey where the buyer never touches a form, filter, or navigation menu. AI handles all navigation and transaction steps. Touchless Commerce is the outcome; Agentic Commerce is the underlying model that makes it possible. Swirl delivers this on any existing website in 2 weeks.
+
+### Lead Conversion Engine
+A Lead Conversion Engine converts anonymous website visitors into qualified, purchase-ready leads by detecting behavioral signals (scroll depth, hover intent, idle time, exit intent) and serving the right AI intervention at the highest-intent moment of the session — not passively waiting for buyers to fill a form.
+
+### Conversion-Driven AEO
+Conversion-Driven AEO structures website content so that AI answer engines (ChatGPT, Perplexity, Gemini) cite it in responses that move buyers toward a purchase decision. Traditional AEO optimizes for citation. Conversion-Driven AEO optimizes for citation that converts.
+
+### Voice Agent Architecture
+Swirl's voice AI uses a unified real-time audio stream — not a chained STT→LLM→TTS pipeline — delivering sub-500ms response latency. This is the difference between a voice interaction that feels like a human conversation and one that feels like a search tool.
 
 ## Key Pages
 
-- Homepage: https://www.goswirl.ai/
-- AI Sales Agent: https://www.goswirl.ai/ai-sales-agent
-- Agentic Commerce: https://www.goswirl.ai/agentic-commerce
-- Touchless Commerce: https://www.goswirl.ai/touchless-commerce
-- BYD Al-Futtaim Case Study: https://www.goswirl.ai/byd-al-futtaim
-- Voice Agent Architecture: https://www.goswirl.ai/voice-agent-architecture
+- **Homepage** — https://goswirl.ai/ — Overview of Swirl's AI Sales Force platform: what it does, how it works, core concepts, and proof metrics (13% conversion rate, 28% engagement, 50+ languages, 2-week deployment)
+- **AI Sales Agent** — https://goswirl.ai/ai-sales-agent — Full guide to what an AI sales agent is, how it differs from chatbots, step-by-step how it works, comparison table (AI Sales Agent vs Chatbot vs Human Sales), and how Swirl deploys AI sales agents
+- **Agentic Commerce** — https://goswirl.ai/agentic-commerce — The definitive guide to agentic commerce (2026). Covers: definition (autonomous AI completing purchase journeys), how it differs from traditional ecommerce (intent detection vs keyword search), the 5-component technology stack (LLM + intent detection + RAG + browser agent + CRM), which industries benefit most (Automotive, Consumer Electronics, Real Estate, Travel), and how Swirl powers agentic commerce. Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+- **Touchless Commerce** — https://goswirl.ai/touchless-commerce — The complete guide to touchless commerce (2026). Covers: definition (zero manual browsing — AI handles discovery to transaction), distinction from conversational commerce (support chat) and agentic commerce (underlying architecture), technology stack (LLMs, intent detection, RAG, browser agents, voice AI, CRM), 6 industries adopting it, and how Swirl delivers touchless commerce in 2 weeks. Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+- **Lead Conversion Engine** — https://goswirl.ai/lead-conversion-engine — Full guide to lead conversion engines (2026). Covers: definition (real-time intent detection → conversational qualification → high-quality CRM-ready lead), distinction from traditional lead generation (form fills vs behavioral signal capture), 5 core mechanics (behavioral scoring, conversational qualification, hesitation resolution, action triggering, CRM enrichment), and how Swirl assembles enriched lead objects (contact details, product interest, budget, timeline, objections resolved, intent score). Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+- **Conversion-Driven AEO** — https://goswirl.ai/conversion-driven-aeo — Swirl's proprietary framework for AEO that converts (2026). Covers: definition (controlling the AI decision layer across the full buyer journey, not just top-of-funnel visibility), where traditional AEO fails (stops at citation), the 5 buyer journey stages (Discovery, Evaluation, Hesitation, Decision, Conversion), why Hesitation is the critical battleground (70%+ buyer drop-off with genuine intent), comparison table (Traditional AEO vs Conversion-Driven AEO), and Swirl's implementation. Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+- **BYD Al-Futtaim Case Study** — https://goswirl.ai/case-study-byd-ai-sales-agent — Full case study: BYD EV advisor deployed in GCC via Al-Futtaim Group; results: 27% engagement rate, 13% conversion rate (5× improvement over 2.5% baseline), 75% increase in time on site, 2.5× month-over-month AI sessions; deployed across BYD website, Blue Rewards App, and email campaigns in 2 weeks
+- **Voice Agent Architecture** — https://goswirl.ai/voice-agent-architecture — Technical architecture overview of Swirl's AI voice agent (2026). Covers: why chained STT→LLM→TTS pipelines fail (900ms+ latency, sequential failure modes), how Swirl's unified real-time stream achieves sub-400ms response, three-tier knowledge retrieval system (Tier 1: in-memory <5ms, Tier 2: vector search, Tier 3: live web), tool layer capabilities (UI rendering, CRM writes, appointment booking), multi-tenant configuration model, and session data structure for CRM handoff. Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+
+## Automotive AI Sales Agent — Content Cluster
+
+Swirl has published a full content cluster targeting automotive dealerships and OEMs evaluating AI sales agents. All pages include FAQPage schema, Article schema with entity linking, and BreadcrumbList schema.
+
+- **AI Sales Agent for Automotive: The Complete Guide** — https://goswirl.ai/pillar-page-ai-sales-agent-automotive — The definitive guide to AI sales agents for car dealerships and OEMs in 2026. Covers: what an AI sales agent is, why it differs from chatbots and live chat, how it works across the full buyer journey (behavioral nudges → conversation → browser autonomy → CRM), BYD case study results, full capability comparison table (AI Sales Agent vs Chatbot vs Live Chat vs Digital Retail Platform), ROI framework, implementation timeline, and 19-question FAQ.
+- **Case Study: How BYD Increased Conversion 5x with an AI Sales Agent** — https://goswirl.ai/case-study-byd-ai-sales-agent — Full case study of Swirl's deployment with BYD and Al-Futtaim in the UAE. Results: 27% engagement rate (vs 5-8% industry average), 13% conversion rate (vs 2.5% baseline — 5x improvement), 75% increase in time on site, 2.5x month-over-month AI session growth. Deployed across BYD website, Blue Rewards app, and email campaigns in 2 weeks. Quote from Himanshu Shrivastava, CTO/CIO/CDO, Al-Futtaim.
+- **7 Best AI Sales Agents for Car Dealerships in 2026 (Honest Comparison)** — https://goswirl.ai/comparison-best-ai-sales-agents-automotive-2026 — Honest comparison of 7 products: Swirl, Gubagoo (Reynolds & Reynolds), Roadster (CDK Global), CarNow, Drivee AI, Digital Air Strike, and Podium. Covers product type, voice support, multilingual capability, browser autonomy, pricing model, and best-fit use case for each. Includes quick comparison table and bottom-line recommendations by dealer type.
+- **AI Chatbot vs AI Sales Agent for Automotive** — https://goswirl.ai/ai-chatbot-vs-ai-sales-agent-automotive — Direct comparison of AI chatbots vs AI sales agents for car dealerships using 4 real-world scenarios: vehicle comparison (Tucson vs Santa Fe), after-hours trade-in question, Spanish-speaking buyer, and the silent browser. Includes full 16-point capability comparison table. Key finding: chatbots achieve 5-8% engagement and under 3% conversion; Swirl's AI sales agent achieved 27% engagement and 13% conversion.
 
 ## Proven Results
 
@@ -72,7 +92,7 @@ Swirl built the world's first BYD AI Advisor deployed across the BYD website, Bl
 
 ## Company
 
-- Website: https://www.goswirl.ai
+- Website: https://goswirl.ai
 - Email: sales@goswirl.ai
 - LinkedIn: https://www.linkedin.com/company/swirl-live-app/
 - Instagram: https://www.instagram.com/swirl_live_app/
