@@ -55,12 +55,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://goswirl.ai/case-study-byd-ai-sales-agent</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://goswirl.ai/comparison-best-ai-sales-agents-automotive-2026</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -71,5 +65,11 @@
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://goswirl.ai/swirl-medicine</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

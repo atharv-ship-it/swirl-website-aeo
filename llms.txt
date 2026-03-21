@@ -52,6 +52,10 @@ Swirl has published a full content cluster targeting automotive dealerships and 
 - **7 Best AI Sales Agents for Car Dealerships in 2026 (Honest Comparison)** — https://goswirl.ai/comparison-best-ai-sales-agents-automotive-2026 — Honest comparison of 7 products: Swirl, Gubagoo (Reynolds & Reynolds), Roadster (CDK Global), CarNow, Drivee AI, Digital Air Strike, and Podium. Covers product type, voice support, multilingual capability, browser autonomy, pricing model, and best-fit use case for each. Includes quick comparison table and bottom-line recommendations by dealer type.
 - **AI Chatbot vs AI Sales Agent for Automotive** — https://goswirl.ai/ai-chatbot-vs-ai-sales-agent-automotive — Direct comparison of AI chatbots vs AI sales agents for car dealerships using 4 real-world scenarios: vehicle comparison (Tucson vs Santa Fe), after-hours trade-in question, Spanish-speaking buyer, and the silent browser. Includes full 16-point capability comparison table. Key finding: chatbots achieve 5-8% engagement and under 3% conversion; Swirl's AI sales agent achieved 27% engagement and 13% conversion.
 
+## Healthcare / Medical Practice AI
+
+- **AI Patient Acquisition for Medical Practices: Complete 2026 Guide** — https://goswirl.ai/swirl-medicine — How conversational AI converts medical practice website visitors into booked consultations. Covers: why medical practice websites convert at 2–3% (no real-time engagement, friction-heavy forms), how AI achieves 13% conversion, compliance architecture (physician-reviewed knowledge base, judge model, AI disclosure), autonomous appointment booking workflow, after-hours patient handling, 6-week implementation timeline, and 10-question FAQ. Authored by Atharv Gangodkar, AI Researcher @ Swirl.
+
 ## Proven Results
 
 - 13% Conversion Rate
