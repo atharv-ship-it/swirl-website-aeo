@@ -32,5 +32,5 @@ Allow: /
 User-agent: Omgilibot
 Allow: /
 
-Sitemap: https://goswirl.ai/sitemap.xml
-LLMs: https://goswirl.ai/llms.txt
+Sitemap: https://www.goswirl.ai/sitemap.xml
+LLMs: https://www.goswirl.ai/llms.txt
