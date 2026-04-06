@@ -57,9 +57,14 @@
   }
   </script>
 
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
+  <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -70,47 +75,6 @@ body {
   background: #FFFFFF;
   -webkit-font-smoothing: antialiased;
 }
-
-/* ── NAV ── */
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #EFEFEF;
-  padding: 0 24px;
-}
-.nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0F0A3C;
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #0F0A3C;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.nav-cta:hover { background: #2D1B8E; }
 
 /* ── HERO ── */
 .blog-hero {
@@ -334,11 +298,33 @@ body {
 <body>
 
   <!-- NAV -->
-  <nav class="site-nav" aria-label="Site navigation">
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Swirl</a>
-      <a href="https://calendly.com/swirl-sales/30min" class="nav-cta" target="_blank" rel="noopener">Book a Demo →</a>
+      <a href="index.html" class="nav-logo" aria-label="Swirl Home">
+        <img src="assets/logo.svg" alt="Swirl" width="90" height="26">
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="index.html#how-it-works" role="menuitem">How It Works</a>
+        <a href="index.html#nudges" role="menuitem">Product</a>
+        <a href="agentic-commerce.html" role="menuitem">Agentic Commerce</a>
+        <a href="ai-sales-agent.html" role="menuitem">AI Sales Agent</a>
+        <a href="blog.html" role="menuitem" aria-current="page">Blog</a>
+        <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="nav-cta">Book a Demo</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="index.html#how-it-works" class="mobile-link">How It Works</a>
+    <a href="index.html#nudges" class="mobile-link">Product</a>
+    <a href="agentic-commerce.html" class="mobile-link">Agentic Commerce</a>
+    <a href="ai-sales-agent.html" class="mobile-link">AI Sales Agent</a>
+    <a href="blog.html" class="mobile-link">Blog</a>
+    <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/prashant-ramani/30min'});return false;" class="mobile-cta">Book a Demo</a>
   </nav>
 
   <!-- HERO -->
@@ -589,17 +575,36 @@ body {
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <a href="index.html" class="footer-logo">Swirl</a>
-      <nav class="footer-links" aria-label="Footer navigation">
+      <a href="index.html" class="footer-logo" aria-label="Swirl Home">
+        <img src="assets/logo.svg" alt="Swirl" width="90" height="26">
+      </a>
+      <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="ai-sales-agent.html">AI Sales Agent</a>
         <a href="agentic-commerce.html">Agentic Commerce</a>
         <a href="case-study-byd-ai-sales-agent.html">Case Study</a>
         <a href="blog.html">Blog</a>
-      </nav>
+      </div>
       <p class="footer-copy">© 2026 Swirl. All rights reserved.</p>
     </div>
   </footer>
 
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
 </body>
 </html>
